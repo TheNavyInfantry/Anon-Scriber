@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home - Anon Scriber
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="row blog mb-5 shadow-sm pb-2 pt-3">
+            {% for post in posts.items %}
+                <div class="col-md-6">
+                    <h3> {{ post.title }} </h3>
+                    <p class="blog-description text-secondary">
+                        {{ post.post }}
+                    </p>
+                    <p class="blog-time-stamp font-weight-bold float-right">
+                        {{ post.time_stamp.strftime('%H:%M - %Y.%m.%d') }}
+                    </p>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+            {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+                {% if page_num %} <!-- If page num isn't none -->
+                    {% if posts.page == page_num %} <!-- If page num isn't none -->
+                        <a class="btn btn-primary mb-4 ml-1 mr-1" href="{{ url_for('shared_posts', page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary mb-4 ml-1 mr-1" href="{{ url_for('shared_posts', page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    <p class="text-primary mt-3 ml-1 mr-1">...</p>
+                {% endif %}
+
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

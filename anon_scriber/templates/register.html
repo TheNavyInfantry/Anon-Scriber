@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+Register - Anon Scriber
+{% endblock title %}
+
+{% block content %}
+<body>
+    <div class="container">
+                <div class="d-flex justify-content-center">
+                    <form method="POST" class="form-register">
+                        {{ form.hidden_tag() }}
+                        <h3 class="text-center text-primary mt-4 mb-4">Create An Account</h3>
+
+                        <div class="form-group justify-content-center text-primary mb-1">
+                            {{ form.username.label() }}
+                            {{ form.username(class="form-control", placeholder="Username") }}
+                            <br>
+                            {{ form.email_address.label() }}
+                            {{ form.email_address(class="form-control", placeholder="Email Address") }}
+                            <br>
+                            {{ form.password.label() }}
+                            {{ form.password(class="form-control", placeholder="Password") }}
+                            <br>
+                            {{ form.re_password.label() }}
+                            {{ form.re_password(class="form-control", placeholder="Confirm Password") }}
+                        </div>
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    {{ form.submit(class="btn btn-primary") }}
+                                </div>
+                                <div class="col-sm">
+                                    <a class="btn btn-light text-primary" href="{{ url_for('login_page') }}">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    </div>
+</body>
+{% endblock content %}
+

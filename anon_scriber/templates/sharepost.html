@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+Share - Anon Scriber
+{% endblock title %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <form method="POST" class="form-login">
+                {{ form.hidden_tag() }}
+
+                <h3 class="text-center text-primary mt-4 mb-4">Share Your Post With Us!</h3>
+
+                <div class="form-group justify-content-center text-primary mb-1">
+                    {{ form.title.label() }}
+                    {{ form.title(class="form-control", placeholder="Shall we write a fancy title?") }}
+                <br>
+                    {{ form.post_text.label() }}
+                    {{ form.post_text(class="form-control", rows="5", placeholder="Feel free to write about anything!")}}
+                </div>
+                <br>
+
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                            {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
