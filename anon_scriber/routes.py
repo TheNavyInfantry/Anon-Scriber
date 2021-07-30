@@ -3,7 +3,7 @@ from anon_scriber.forms import RegisterForm, LoginForm, PostForm
 from anon_scriber.models import User, Post
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required
 
 
 @app.route('/')
@@ -71,7 +71,8 @@ def post_page():
 
     if form.validate_on_submit():
         post_to_create = Post(title=form.title.data,
-                              post=form.post_text.data)
+                              post=form.post_text.data,
+                              user_id=current_user.id)
 
         db.session.add(post_to_create)
 
@@ -97,6 +98,20 @@ def shared_posts():
     posts = Post.query.order_by(Post.time_stamp.desc()).paginate(page=page, per_page=6) #To get latest records from db
 
     return render_template("posts.html", posts=posts)
+
+@app.route('/user/<int:id>', methods=['GET', 'POST'])
+@login_required
+def user_posts(id):
+
+    page = request.args.get('page', 1, type=int)
+
+    user = User.query.filter_by(id=id).first_or_404()
+
+    posts = Post.query.filter_by(user=user)\
+        .order_by(Post.time_stamp.desc())\
+        .paginate(page=page, per_page=6) #To get latest records from db
+
+    return render_template("userposts.html", posts=posts, user=user)
 
 @app.route('/logout')
 @login_required
