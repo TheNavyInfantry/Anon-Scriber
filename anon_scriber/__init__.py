@@ -5,7 +5,6 @@ from flask_migrate import Migrate
 from datetime import datetime
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-import requests
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
