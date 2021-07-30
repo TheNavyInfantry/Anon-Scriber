@@ -5,16 +5,21 @@ My Posts - Anon Scriber
 {% endblock title %}
 
 {% block content %}
-    <h1 class="mt-1 mb-3 text-center text-primary">Posts By {{ user.username }} ({{ posts.total }})</h1>
+    <h1 class="mt-2 mb-3 text-center text-primary">Posts By {{ user.username }} ({{ posts.total }})</h1>
     <div class="container mt-5">
         <div class="row blog mb-5 shadow-sm pb-2 pt-3">
             {% for post in posts.items %}
                 <div class="col-md-6">
-                    <h3> {{ post.title }} </h3>
+                    <h3> {{ post.title }}
+                        <h5> <a class="blog-delete float-right text-danger"
+                           href="{{ url_for('delete_post', post_id=post.id) }}"><i class="fas fa-trash-alt"></i></a>
+                        </h5>
+                    </h3>
                     <p class="blog-description text-secondary">
                         {{ post.post }}
+
                     </p>
-                    <p class="blog-time-stamp font-weight-bold float-right">
+                    <p class="pt-1 blog-time-stamp font-weight-bold float-right">
                         {{ post.time_stamp.strftime('%H:%M - %Y.%m.%d') }}
                     </p>
                     <hr>
