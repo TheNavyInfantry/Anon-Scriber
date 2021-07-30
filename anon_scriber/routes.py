@@ -1,7 +1,7 @@
 from anon_scriber import app, db
 from anon_scriber.forms import RegisterForm, LoginForm, PostForm
 from anon_scriber.models import User, Post
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -93,11 +93,13 @@ def post_page():
 @login_required
 def shared_posts():
 
+    user_sum = db.session.query(User).count()
+
     page = request.args.get('page', 1, type=int)
 
     posts = Post.query.order_by(Post.time_stamp.desc()).paginate(page=page, per_page=6) #To get latest records from db
 
-    return render_template("posts.html", posts=posts)
+    return render_template("posts.html", posts=posts, user_sum=user_sum)
 
 @app.route('/user/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -112,6 +114,23 @@ def user_posts(id):
         .paginate(page=page, per_page=6) #To get latest records from db
 
     return render_template("userposts.html", posts=posts, user=user)
+
+@app.route('/user/<int:post_id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+
+    post = Post.query.get_or_404(post_id)
+
+    if post.user != current_user:
+        abort(403)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    flash(f"Your post has been deleted!", category='success')
+
+    return redirect(url_for('shared_posts'))
+
 
 @app.route('/logout')
 @login_required
