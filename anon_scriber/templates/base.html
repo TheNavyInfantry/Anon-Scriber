@@ -34,11 +34,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('post_page') }}">Share a Post</a>
                 </li>
-
-                {% block userposts %}
-
-                {% endblock userposts%}
-
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('user_posts', id=current_user.id) }}">My Posts</a>
+                </li>
                 {% else %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
