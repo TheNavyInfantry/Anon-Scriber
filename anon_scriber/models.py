@@ -6,7 +6,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(length=50), unique=True, nullable=False)
     email_address = db.Column(db.String(length=60), unique=True, nullable=False)
     password_hash = db.Column(db.String(length=60), nullable=False)
@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
     def __repr__(self):
-        return f"{self.username} - {self.email_address} - {self.password_hash}\n{self.posts}"
+        return f"User('{self.id}', '{self.username}', '{self.email_address}', '{self.password_hash}', '{self.posts}')"
 
 
 class Post(db.Model):
@@ -35,4 +35,4 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"{self.user_id} - {self.title}\n{self.post} - {self.time_stamp}"
+        return f"Post('{self.user_id}', '{self.title}', '{self.post}', '{self.time_stamp}')"
