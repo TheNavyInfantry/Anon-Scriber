@@ -3,13 +3,8 @@
 404 - ERROR
 {% endblock title %}
 
-{% block navbar %}
-    <a class="navbar-brand" href="{{ url_for('shared_posts') }}">Return</a>
-{% endblock navbar %}
-
-{% block body %}
-
-    <main class="flex-fill text-white">
+{% block content %}
+    <div class="flex-fill text-white">
         <div class="d-flex flex-column mt-5">
             <h1 class="display-1 d-flex justify-content-center mt-5 pt-5">404!</h1>
             <h3 class="display-4 text-center mt-3 px-2">
@@ -19,6 +14,5 @@
                 <small>The page you are looking for was not found.</small>
             </h3>
         </div>
-    </main>
-
-{% endblock body %}
+    </div>
+{% endblock content %}
