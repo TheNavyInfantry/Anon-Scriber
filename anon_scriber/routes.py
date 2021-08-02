@@ -1,7 +1,7 @@
 from anon_scriber import app, db
 from anon_scriber.forms import RegisterForm, LoginForm, PostForm
 from anon_scriber.models import User, Post
-from flask import Flask, render_template, redirect, url_for, flash, request, abort
+from flask import Flask, render_template, redirect, url_for, flash, request, abort, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -52,6 +52,10 @@ def login_page():
         if attempted_user and attempted_user.check_password_correction(attempted_password=form.password.data):
 
             login_user(attempted_user)
+
+            session.permanent = True
+
+            session.modified = True
 
             flash(f"You have successfully logged in as {attempted_user.username}", category='success')
 
