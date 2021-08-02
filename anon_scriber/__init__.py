@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '88948ab134d6c6bab5b41493'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
 
 db = SQLAlchemy(app)
 
