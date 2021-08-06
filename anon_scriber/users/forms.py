@@ -1,9 +1,7 @@
-from anon_scriber import app
 from anon_scriber.models import User
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from wtforms.validators import Length, DataRequired, EqualTo, Email
-from anon_scriber import datetime
 
 class RegisterForm(FlaskForm):
 
@@ -31,11 +29,3 @@ class LoginForm(FlaskForm):
     email_address = StringField(label='Email Address')
     password = PasswordField(label='Password')
     submit = SubmitField(label='Login')
-
-class PostForm(FlaskForm):
-    title = StringField(label='Title: ', validators=[Length(min=1, max=60), DataRequired()])
-    post_text = TextAreaField(label='Your Post: ', validators=[Length(min=1, max=1024), DataRequired()])
-    time_stamp_of_post = StringField(label="Posted on: ", default=datetime.utcnow)
-    submit = SubmitField(label='Share')
-
-
