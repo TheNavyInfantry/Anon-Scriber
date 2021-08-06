@@ -12,7 +12,7 @@ My Posts - Anon Scriber
                 <div class="col-md-6">
                     <h3> {{ post.title }}
                         <h5> <a class="blog-delete float-right text-danger"
-                           href="{{ url_for('delete_post', post_id=post.id) }}"><i class="fas fa-trash-alt"></i></a>
+                           href="{{ url_for('posts.delete_post', post_id=post.id) }}"><i class="fas fa-trash-alt"></i></a>
                         </h5>
                     </h3>
                     <p class="blog-description text-secondary">
@@ -33,9 +33,9 @@ My Posts - Anon Scriber
 
                 {% if page_num %} <!-- If page num isn't none -->
                     {% if posts.page == page_num %} <!-- If page num isn't none -->
-                        <a class="btn btn-primary mb-4 ml-1 mr-1" href="{{ url_for('shared_posts', page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-primary mb-4 ml-1 mr-1" href="{{ url_for('posts.shared_posts', page=page_num) }}">{{ page_num }}</a>
                     {% else %}
-                        <a class="btn btn-outline-primary mb-4 ml-1 mr-1" href="{{ url_for('shared_posts', page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-outline-primary mb-4 ml-1 mr-1" href="{{ url_for('posts.shared_posts', page=page_num) }}">{{ page_num }}</a>
                     {% endif %}
                 {% else %}
                     <p class="text-primary mt-3 ml-1 mr-1">...</p>

@@ -29,9 +29,9 @@ Home - Anon Scriber
 
                 {% if page_num %} <!-- If page num isn't none -->
                     {% if posts.page == page_num %} <!-- If page num isn't none -->
-                        <a class="btn btn-primary mb-4 ml-1 mr-1" href="{{ url_for('shared_posts', page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-primary mb-4 ml-1 mr-1" href="{{ url_for('posts.shared_posts', page=page_num) }}">{{ page_num }}</a>
                     {% else %}
-                        <a class="btn btn-outline-primary mb-4 ml-1 mr-1" href="{{ url_for('shared_posts', page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-outline-primary mb-4 ml-1 mr-1" href="{{ url_for('posts.shared_posts', page=page_num) }}">{{ page_num }}</a>
                     {% endif %}
                 {% else %}
                     <p class="text-primary mt-3 ml-1 mr-1">...</p>
